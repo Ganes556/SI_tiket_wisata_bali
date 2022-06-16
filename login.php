@@ -1,12 +1,6 @@
-<?php 
-    ini_set( 'session.cookie_httponly', 1 );
-    session_start();
-    include('functions.php');     
-    cors();
-    if(checkLogin()){
-        header("Location: dashboard.php");
-        die();
-    }
+<?php             
+    include('controller.php');
+    login();
 ?>
 
 <!DOCTYPE html>
@@ -30,48 +24,40 @@
 </head>
 <body>
     <div class="container-fluid" style="height: 100%;">    
-        <div class="row row-cols-2 d-flex" style="height: 100%;">
-            <div class="col img-login" ></div>
-            <div class="col px-5 py-4 m-auto">
-                <div class="row mb-5">
+        <div class="row row-cols-2" style="height: 100%;">
+            <div class="col img-login"></div>
+            <div class="col px-5 py-4 m-auto overflow-auto" style="<?php if(count($_SESSION['error']) > 2) echo 'height:100%' ?>;">
+                <div class="row mb-3">
                     <h1 class="fw-bold fs-1">Mari</h1>
                     <h1 class="fw-bold fs-1 text-warning">Berwisata</h1>
                     <h1 class="fw-bold fs-1">Bersama Kami.</h1>
-                </div> 
+                </div>
+
+                <?php if($_SESSION['error']){?>
+                    <?php for($i =0; $i < count($_SESSION['error']); $i++) { ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?= $_SESSION['error'][$i] ?>
+                        </div>
+                    <?php } ?>
+                <?php }?>                
                 <div class="row">
-                    <form action="controllerLogin.php" method="post">
+                    <form action="login.php" method="post">                                            
                         <div class="form-floating mb-3">
-                            <input type="text" name='username' class="form-control input-form" id="username" placeholder="Psername">
-                            <label for="username" class="hint">Username</label>
+                            <input type="text" name='username' class="form-control input-form <?php if($_SESSION['error']) echo 'is-invalid' ?>" id="username" required placeholder="Username">
+                            <label for="username" class="hint">Username</label>                            
                         </div>
                         <div class="form-floating mb-5">
-                            <input type="password" name="password" class="form-control input-form" id="password" placeholder="Password">
+                            <input type="password" name="password" class=" form-control input-form <?php if($_SESSION['error']) echo 'is-invalid' ?>" id="password" required placeholder="Password">
                             <label for="password" class="hint">Password</label>
                         </div>
                         <div class="container-fluid p-0 d-flex">
-                            <button type="submit" class="m-auto p-2 btn btn-warning text-white fw-bold fs-4 text-uppercase" style="width: 50%;">Login</button>
+                            <button type="submit" name='login' class="m-auto p-2 btn btn-warning text-white fw-bold fs-4 text-uppercase" style="width: 50%;">Login</button>
                         </div>
                     </form>
                 </div>               
                 
             </div>
         </div>
-    </div>
-
-    <script></script>
-
-    <!-- <?php        
-        // if($_SERVER["REQUEST_METHOD"] == "POST"){
-        //     login();
-        // }else{
-    ?>
-        <form action="login.php" method="post">
-            <input type="text" name="username" placeholder="username">
-            <input type="password" name="password" placeholder="password">
-            <input type="submit" value="Login">
-        </form>
-        <a href="register.php">Register</a>
-    <?php //}?> -->
-
+    </div>    
 </body>
 </html>

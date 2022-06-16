@@ -1,8 +1,6 @@
-<?php session_start(); include('functions.php'); 
-    if(!checkLogin()){
-        header("Location: login.php");
-        die();
-    }
+<?php 
+    include "controller.php";
+    dashboard();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +11,7 @@
     <title>Dashboard</title>
 </head>
 <body>        
+    
     <h1>HELLO <?= $_SESSION['nama']?></h1>
 </body>
 </html>
