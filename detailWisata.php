@@ -21,14 +21,14 @@ include "controller.php";
     <!-- custom css  -->
     <link rel="stylesheet" href="./assets/css/style.css">
     <!-- favicon -->
-    <link rel="icon" type="image/png" href="./assets/img/Logo.png" />
+    <link rel="icon" type="image/png" href="./assets/img/LogoWhite.png" />
     <title><?=$wisata['Nama']?></title>
 </head>
 
 <body>
 
     <head>
-        <nav class="navbar fixed-top navbar-expand-lg navbar-transparent mb-5">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-accent-25 mb-5">
             <div class="container-fluid px-3 d-flex justify-content-between">
                 <a class="navbar-brand me-auto" href="index.php">
                     <img class="img-fluid" src="./assets/img/Logo.png" alt="Logo">
@@ -281,9 +281,7 @@ include "controller.php";
             </div>
         </div>       
     </section>
-
+</body>
     <script src="./assets/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/script.js"></script>
-</body>
-
 </html>

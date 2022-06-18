@@ -38,8 +38,9 @@ html {
 .navbar-brand {
   width: 3.5rem;
 }
-.navbar-transparent {
-  background-color: transparent;
+.navbar-accent-25 {
+  background-color: rgba(234, 249, 178,0.3);
+
 }
 
 .btn-custom {

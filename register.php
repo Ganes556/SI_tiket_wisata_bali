@@ -11,14 +11,16 @@
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet"> 
-    <!-- bootstrap -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- bootstrap css -->
     <link rel="stylesheet" href="./assets/css/bootstrap.css">
-    <script src="./assets/js/bootstrap.bundle.min.js"></script>
-    <script src="./assets/js/bootstrap.min.js"></script>    
-    <script src="./assets/js/jquery-3.6.0.js"></script>    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <!-- jquery -->    
+    <script src="./assets/js/jquery-3.6.0.js"></script>
     <!-- custom css  -->
     <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="./assets/img/LogoWhite.png" />
     <title>Register</title>
 </head>
 <body>        
@@ -75,6 +77,7 @@
             
         </div>
     </div>    
-
 </body>
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/script.js"></script>
 </html>

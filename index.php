@@ -21,7 +21,7 @@ include "controller.php";
     <!-- custom css  -->
     <link rel="stylesheet" href="./assets/css/style.css">
     <!-- favicon -->
-    <link rel="icon" type="image/png" href="./assets/img/Logo.png" />
+    <link rel="icon" type="image/png" href="./assets/img/LogoWhite.png" />
     <title>Dashboard</title>
 </head>
 
@@ -123,7 +123,7 @@ include "controller.php";
                         <h5 class="modal-title fw-bold" id="titleModalLabel"></h5>
                         <button type="button" class="btn-close btn-close-warning" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form method="POST">                        
+                    <form action="index.php" method="POST">                        
                         <input type="hidden" name="IdWisata" id="IdWisata">
                         <div class="modal-body">
                         <?php if(isset($wisataInTransaksi)){?>                            
@@ -198,14 +198,14 @@ include "controller.php";
                             <?php }?>
                         </div>
                         <form enctype="multipart/form-data" method="POST">
-                            <!-- id transaksi -->
-                            <input type="hidden" name="IdTransaksi" value="<?= $transaksi["IdTransaksi"] ?>">
                             <div class="form-group">
                                 <div class="mb-3">
                                     <label for="formFile" class="form-label fw-bold">Upload Bukti Pembayaran</label>
                                     <input class="form-control" required  name="buktiPembayaran" type="file" id="formFile" accept="image/*">
                                 </div>      
-                            </div>                           
+
+                            </div>
+                                                    
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-custom fw-bold" data-bs-dismiss="modal">BATAL</button>
@@ -275,9 +275,9 @@ include "controller.php";
         </div>
         
     </section>        
-    <script src="./assets/js/bootstrap.bundle.min.js"></script>
-    <!-- <script src="./assets/js/dashboard.js"></script>       -->
-    <script src="./assets/js/script.js"></script>      
+    
 </body>
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>    
+    <script src="./assets/js/script.js"></script>      
 
 </html>

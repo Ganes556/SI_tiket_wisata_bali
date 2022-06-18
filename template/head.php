@@ -16,10 +16,4 @@
     <!-- custom css  -->
     <link rel="stylesheet" href="./assets/css/style.css">
     <!-- favicon -->
-    <link rel="icon" type="image/png" href="./assets/img/Logo.png" />
-    <title>Admin Panel</title>
-</head>
-<body>
-        
-</body>
-</html>
+    <link rel="icon" type="image/png" href="./assets/img/LogoWhite.png" />
