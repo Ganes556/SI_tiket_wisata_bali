@@ -13,27 +13,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet"> 
     <!-- bootstrap -->
-    <link rel="stylesheet" href="./public/css/bootstrap.css">
-    <script src="./public/js/bootstrap.bundle.min.js"></script>
-    <script src="./public/js/bootstrap.min.js"></script>    
-    <script src="./public/js/jquery-3.6.0.js"></script>    
+    <link rel="stylesheet" href="./assets/css/bootstrap.css">
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>    
+    <script src="./assets/js/jquery-3.6.0.js"></script>    
     <!-- custom css  -->
-    <link rel="stylesheet" href="./public/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>Register</title>
 </head>
 <body>        
     <div class="container-fluid" style="height: 100%; ">    
         <div class="row row-cols-2" style="height: 100%;">
-            <div class="col p-4 m-auto <?php if($_SESSION['error'] || $_SESSION['msg']) echo 'overflow-auto'?>" style="height: 100%;">
-                 
-                <div class="row px-4 mb-5"> 
-                    <h1 class="m-0 p-0 mb-1 fw-bold fs-1">Selamat Datang!</h1>                    
-                    <div class="box-line mb-4"></div>
-                    
+        
+            <div class="col p-0" style="height: 100%;">
+                <img class="img-fluid img-register" src="./assets/img/register.png" alt="login image">
+            </div>
+
+            <div class="col pt-4 pe-5 m-auto <?php if($_SESSION['error'] || $_SESSION['msg']) echo 'overflow-auto' ?>" style="height: 100%;">
+                <div class="row px-4 mb-3"> 
+                    <h1 class="m-0 p-0 mb-3 fw-bold fs-1">Selamat Datang!</h1>                    
                     <?php if($_SESSION['error']){ ?>
                         <div class="alert alert-danger">
                             <?php foreach($_SESSION['error'] as $error){ ?>
-                                <?php echo $error ?><br>
+                                <?php echo $error ?><br>    
                             <?php } ?>
                         </div>
                     <?php } ?>
@@ -71,9 +73,10 @@
                             <button type="submit" name="register" class="m-auto p-2 btn btn-warning text-white fw-bold fs-4 text-uppercase" style="width: 50%;">Register</button>
                         </div>
                     </form>
+                    <a href="http://localhost/project_UAS/login.php" class="m-auto p-2 text-center text-warning fw-bold fs-5 text-uppercase">login</a>
                 </div>                      
             </div>
-            <div class="col img-register" ></div>
+            
         </div>
     </div>    
 

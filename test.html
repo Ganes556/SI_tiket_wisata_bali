@@ -1,0 +1,17 @@
+<div class="col">
+  <div class="card shadow border-0 mb-4" style="width: 18rem; height:380px">
+      <img src="<?= $w['UrlThumbnailWST'] ?>" height="150px" class="card-img-top" alt="...">
+      <div class="card-body">
+          <div class="card-title d-flex">
+              <div class="fw-bold fs-5"><?= $w['Nama'] ?></div>
+          </div>
+          <p class="card-text fw-light truncate-text"><?= $w['Deskripsi'] ?></p>
+          <div class="">
+              <a href="http://localhost/project_UAS/detailWisata.php?id=<?= $w['IdWisata'] ?>" class="btn btn-custom px-4 text-warning fw-bold text-uppercase">Detail</a>
+
+              <button id="beli-tiket" type="button" `${(statusLogin) ? "onclick=\"location.href='http://localhost/project_UAS/login.php'\"" : "onclick=\"$('#titleModalLabel').text(`\"" . $w['Nama'] . "\"`)"`}
+                                                       class="btn ms-3 btn-warning text-white fw-bold text-uppercase" data-bs-toggle="modal" data-bs-target="#modalTicket" data-harga="<?= $w['Harga'] ?>">Beli Tiket</button>
+          </div>
+      </div>
+  </div>
+</div>

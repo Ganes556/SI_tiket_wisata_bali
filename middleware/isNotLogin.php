@@ -1,6 +1,7 @@
 <?php 
-    if(!isset($_SESSION['id'])){
+    if(!isset($_SESSION['user'])){
         header("Location: login.php");        
-        die();
+        return 1;
     }
+    return 0;
 ?>
