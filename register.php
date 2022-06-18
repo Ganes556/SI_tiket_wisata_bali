@@ -29,22 +29,18 @@
                 <img class="img-fluid img-register" src="./assets/img/register.png" alt="login image">
             </div>
 
-            <div class="col pt-4 pe-5 m-auto <?php if($_SESSION['error'] || $_SESSION['msg']) echo 'overflow-auto' ?>" style="height: 100%;">
+            <div class="col pt-4 pe-5 m-auto <?php if(isset($_SESSION['error']['register']) || isset($_SESSION['msg']['register'])) echo 'overflow-auto' ?>" style="height: 100%;">
                 <div class="row px-4 mb-3"> 
                     <h1 class="m-0 p-0 mb-3 fw-bold fs-1">Selamat Datang!</h1>                    
-                    <?php if($_SESSION['error']){ ?>
+                    <?php if(isset($_SESSION['error']['register'])){ ?>
                         <div class="alert alert-danger">
-                            <?php foreach($_SESSION['error'] as $error){ ?>
-                                <?php echo $error ?><br>    
-                            <?php } ?>
+                            <?= $_SESSION['error']['register'] ?>
                         </div>
                     <?php } ?>
 
-                    <?php if($_SESSION['msg']){?>
+                    <?php if(isset($_SESSION['msg']['register'])){?>
                         <div class="alert alert-success">
-                            <?php foreach($_SESSION['msg'] as $msg){ ?>
-                                <?php echo $msg ?><br>
-                            <?php } ?>
+                            <?= $_SESSION['msg']['register'] ?>
                         </div>
                     <?php }; ?>
 

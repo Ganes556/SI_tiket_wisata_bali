@@ -1,9 +1,10 @@
-function clickBeliTiket(nama, harga) {
+function clickBeliTiket(nama, harga,id) {
     $('#titleModalLabel').text(nama);
     // console.log($(this).data('Harga'));
     let formating = (($('#tiket').val() * harga) / 1000).toFixed(3);
     $('#total-pembelian').text("Rp. " + formating)
     $('#total-pembelian').attr('data-harga', harga)
+    $('#IdWisata').val(id)
     // console.log(parseInt(formating)*1000)
 
 }
@@ -32,7 +33,10 @@ $(document).ready(function () {
                         let card = ``;
 
                         for (let i = 1; i < wisata.length; i++) {
-                            let onclickBtn = (!statusLogin) ? `onclick="location.href='http://localhost/project_UAS/login.php'"` : `onclick="clickBeliTiket(\`${wisata[i]['Nama']}\`,${wisata[i]['Harga']})"`
+                            let onclickBtn = (!statusLogin) 
+                                ? `onclick="location.href='http://localhost/project_UAS/login.php'"` 
+                                : `onclick="clickBeliTiket(\`${wisata[i]['Nama']}\`,${wisata[i]['Harga']},${wisata[i]['IdWisata']})"`;
+                                
                             card += `<div class="col">
                                         <div class="card shadow border-0 mb-4" style="width: 18rem;">
                                         <img src="${wisata[i]['UrlThumbnailWST']}" height="150px" class="card-img-top" alt="...">

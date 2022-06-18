@@ -19,7 +19,10 @@
     //     echo $key . "\n";
     // }
 
-    echo number_format((2000000/1000), 3, '.',"");
-    // echo serialize(explode(",","https://drive.google.com/open?id=19tvFwCBVmSMxC9AAS2BgNjHi3lZFM2tX, https://drive.google.com/open?id=1PjatDxCwvWVHarWjbhsLG2K81cBJKv9y, https://drive.google.com/open?id=1BY-xJSmnA_DuPoF05w2dxAYPru_Aq9aJ"));
+    // echo number_format((2000000/1000), 3, '.',"");
+    // echo date("d M Y",time()) . "\n";
+    
+    echo hash();
+    // echo serialize(explode(",","https://drive.google.com/uc?id=1JKVKqCUjikMTrj4RiMQuIB9MSHLodmue, https://drive.google.com/uc?id=1leMigDAdr1XG9xXsyRiKl_bVc7-_9v14, https://drive.google.com/uc?id=1NhBigW5dQuDlxRCiQxZmSKQYx0f6kh60, https://drive.google.com/uc?id=15kaLn4hG9Xob17ApB-LBjnwcO6yFCwqZ"));
     // echo hash('md5', 'BuKt1_P3mb4Y4r4n');
 ?>

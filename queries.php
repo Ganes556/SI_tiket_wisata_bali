@@ -2,6 +2,23 @@
     include "config.php";
     function getTransactionUser($idUser){
         $conn = conn();
+        $sql= "SELECT * FROM transaksi WHERE IdUser = ? AND StatusPembelian = 'menunggu pembayaran'";
+        $prepare = $conn -> prepare($sql);
+        $prepare -> bind_param("s", $idUser);
+        $prepare -> execute();
+        $result = $prepare -> get_result();        
+        if ($result->num_rows > 0) { 
+            $row = $result->fetch_assoc();
+            $conn->close();
+            return $row;            
+        }
+        $conn->close();
+        return 0;        
+    }
+    
+    // get history transaksi 
+    function getHistoryTransaksi($idUser){
+        $conn = conn();
         $sql= "SELECT * FROM transaksi WHERE IdUser = ?";
         $prepare = $conn -> prepare($sql);
         $prepare -> bind_param("s", $idUser);
@@ -9,19 +26,14 @@
         $result = $prepare -> get_result();
         if ($result->num_rows > 0) {
             $transaksi_arr = array();
-            while($row = $result->fetch_assoc()) {
-                if($row["StatusPembelian"] === "menunggu pembayaran"){
-                    $transaksi_arr[] = $row;
-                }
+            while($row = $result->fetch_assoc()) { 
+                $transaksi_arr[] = $row;                
             }
             $conn->close();
-
-            if(count($transaksi_arr) > 0){
-                return $transaksi_arr;
-            }
+            return $transaksi_arr;
         }
         $conn->close();
-        return 0;        
+        return 0;
     }
 
     function getUser($username){
@@ -72,16 +84,38 @@
         $prepare = $conn -> prepare($sql);
         $prepare -> execute();
         $result = $prepare -> get_result();
-        if ($result->num_rows > 0) {
-            $wisata_arr = array();
-            while($row = $result->fetch_assoc()) {
-                $wisata_arr[] = $row;
-            }
+        if ($result->num_rows > 0) {            
+            $row = $result->fetch_assoc();
             $conn->close();
-            return $wisata_arr;
+            return $row;
         }
         $conn->close();
         return 0;
     }
+    function beliTiket($idUser, $idWisata, $tiket){
+        $conn = conn();
+        // check if user already have a transaction
+        $transaksi = getTransactionUser($idUser);
+        if($transaksi === 0){
+            $sql = "INSERT INTO transaksi (IdUser, IdWisata, StatusPembelian, TanggalPembelian, JumlahTiket ) VALUES (?, ?, ?, ?, ?)";
+            $prepare = $conn -> prepare($sql);        
+            $time = time();
+            $status = "menunggu pembayaran";
+            $jumlahTiket = $tiket;
+            $prepare -> bind_param("sssss", $idUser, $idWisata, $status, $time, $jumlahTiket);        
+            $prepare -> execute();                        
+        }
+        $conn->close();        
+    }
+    // change status pembelian
+    function changeStatusPembelian($idTransaksi, $status, $buktiPembayaran = null){
+        $conn = conn();
+        $sql = "UPDATE transaksi SET StatusPembelian = ?, UrlBuktiPembayaran = ? WHERE IdTransaksi = ?";
+        $prepare = $conn -> prepare($sql);
+        $prepare -> bind_param("sss", $status, $buktiPembayaran, $idTransaksi);        
+        $prepare -> execute();
+        $conn->close();
+    }
+
     
 ?>

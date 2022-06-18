@@ -99,25 +99,6 @@ html {
   box-shadow: none;
 }
 
-/* file upload */
-.fileUpload {
-    position: relative;
-    width: 100%;
-    overflow: hidden;    
-}
-.fileUpload input.upload {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    right: 0;
-    margin: 0;
-    padding: 0;    
-    font-size: 20px;
-    cursor: pointer;
-    opacity: 0;
-    filter: alpha(opacity=0);
-}
-
 /* detail */
 
 .img-detail{  
@@ -125,9 +106,9 @@ html {
   background-repeat: no-repeat;  
   background-size: 100% 100%;  
   width: 100vw;
-  height: 40vh;  
+  height: 50vh;  
   
-  /* position: relative  ; */
+  position: relative  ;
   /* min-width: 100vw;
   min-height: 50vh; */
 }
@@ -156,3 +137,39 @@ html {
 .carousel-control-next-icon {
   background-image: url("../img/next.png") !important;
 }
+
+/* dropdown */
+.dropbtn {
+  background-image: url("../img/user.png");
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
