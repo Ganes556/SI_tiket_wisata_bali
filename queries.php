@@ -117,5 +117,75 @@
         $conn->close();
     }
 
-    
+    // get all user not admin
+    function getAllUser(){
+        $conn = conn();
+        $sql= "SELECT * FROM users WHERE Role != 'admin'";
+        $prepare = $conn -> prepare($sql);
+        $prepare -> execute();
+        $result = $prepare -> get_result();
+        $user_arr = array();
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $user_arr[] = $row;
+            }            
+        }
+        $conn->close();
+        return $user_arr;
+    }
+
+    // get all transaksi     
+    function getAllTransaksiUser(){
+        $conn = conn();
+        $sql= "SELECT transaksi.IdTransaksi, UrlBuktiPembayaran ,JumlahTiket , TanggalPembelian, StatusPembelian ,wisata.Nama as NamaWisata, users.Nama as NamaPembeli, wisata.Harga FROM transaksi INNER JOIN wisata ON transaksi.IdWisata = wisata.IdWisata INNER JOIN users ON transaksi.IdUser = users.IdUser WHERE users.Role != 'admin'";
+
+        $prepare = $conn -> prepare($sql);
+        $prepare -> execute();
+        $result = $prepare -> get_result();
+        $transaksi_arr = array();
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $transaksi_arr[] = $row;
+            }
+        }
+        $conn->close();
+        return $transaksi_arr;
+    }
+
+    // get all wisata
+    function getAllWisata(){
+        $conn = conn();
+        $sql= "SELECT * FROM wisata";
+        $prepare = $conn -> prepare($sql);
+        $prepare -> execute();
+        $result = $prepare -> get_result();
+        $wisata_arr = array();
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $wisata_arr[] = $row;
+            }
+        }
+        $conn->close();
+        return $wisata_arr;        
+    }    
+
+    // delete wisata
+    function delWisata($idWisata){
+        $conn = conn();
+        $sql= "DELETE FROM wisata WHERE IdWisata = ?";
+        $prepare = $conn -> prepare($sql);
+        $prepare -> bind_param("s", $idWisata);
+        $prepare -> execute();        
+    }     
+    // $noRekening = null -> belum ada
+    function updateWisata($idWisata, $newWisata){
+
+        $conn = conn();        
+        $sql= "UPDATE wisata SET Nama = ?, Harga = ? , Deskripsi = ?, UrlThumbnailWST = ?, UrlGaleriWST = ? WHERE IdWisata = ?";
+        $prepare = $conn -> prepare($sql);
+        $prepare -> bind_param("ssssss", $newWisata['Nama'], $newWisata['Harga'], $newWisata['Deskripsi'], $newWisata['UrlThumbnailWST'], $newWisata['UrlGaleriWST'], $idWisata);
+        $prepare -> execute();
+        $conn->close();    
+    }
+
 ?>

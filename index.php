@@ -26,7 +26,7 @@ include "controller.php";
 </head>
 
 <body>
-    <head>
+    <header>
         <nav class="navbar sticky-top shadow navbar-expand-lg navbar-accent mb-5">
             <div class="container-fluid px-3 d-flex justify-content-between">
                 <a class="navbar-brand me-auto" href="#">
@@ -83,11 +83,11 @@ include "controller.php";
                                 <img src="<?= $w['UrlThumbnailWST'] ?>" height="150px" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <div class="card-title d-flex flex-column">
-                                        <div class="fw-bold fs-5">
+                                        <div class="fw-bold fs-5 nowrap-1-line ">
                                             <?= $w['Nama'] ?>
                                         </div>
                                         <div class="fw-bold fs-5 text-warning">
-                                            Rp. <?= number_format($w['Harga']/1000,3, '.',"") // formating to idr?>/Tiket
+                                            Rp. <?= totalInIdr($w['Harga'],1) // formating to idr?>/Tiket
                                         </div>
                                     </div>
                                     <p class="card-text fw-light truncate-text"><?= $w['Deskripsi'] ?></p>
@@ -162,7 +162,7 @@ include "controller.php";
                         <h6>Lakukan pembayaran
                             <?php if(isset($wisataInTransaksi))
                                 echo "<span class='fw-bold'>";
-                                echo "Rp. " . number_format(($transaksi["JumlahTiket"] * $wisataInTransaksi['Harga'])/1000,3, '.',""); // formating to idr
+                                echo totalInIdr($transaksi["JumlahTiket"],$wisataInTransaksi['Harga']); // formating to idr
                                 echo "</span>";
                                 echo " sebelum";
                                 echo "<span class='fw-bold'>";
@@ -198,6 +198,7 @@ include "controller.php";
                             <?php }?>
                         </div>
                         <form enctype="multipart/form-data" method="POST">
+                        <input type="hidden" name="IdTransaksi" value="<?= $transaksi["IdTransaksi"] ?>">
                             <div class="form-group">
                                 <div class="mb-3">
                                     <label for="formFile" class="form-label fw-bold">Upload Bukti Pembayaran</label>

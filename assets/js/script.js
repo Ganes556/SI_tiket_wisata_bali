@@ -8,6 +8,7 @@ function clickBeliTiket(nama, harga,id) {
   // console.log(parseInt(formating)*1000)
 
 }
+
 $(document).ready(function () {
   // check input tiket
   jQuery(function ($) {

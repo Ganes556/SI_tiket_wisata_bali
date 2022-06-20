@@ -26,8 +26,7 @@ include "controller.php";
 </head>
 
 <body>
-
-    <head>
+    <header>
         <nav class="navbar fixed-top navbar-expand-lg navbar-accent-25 mb-5">
             <div class="container-fluid px-3 d-flex justify-content-between">
                 <a class="navbar-brand me-auto" href="index.php">
@@ -74,7 +73,7 @@ include "controller.php";
                 <?= $wisata['Deskripsi'] ?>
             </div>
 
-            <!-- daftar foto wisata -->
+            <!-- galeri wisata -->
             <div class="container mb-5">
                 <h1 class="text-center fw-bold">Foto</h1>
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -91,17 +90,15 @@ include "controller.php";
                                     echo '<div class="d-flex justify-content-center w-100">';
                                         for($j=0;$j<count($UrlImg[$i]);$j++){
                                             if($j==1){
-                                                echo '<img class="img-fluid rounded shadow-sm mx-3" width="200px" height="200px" src="'.$UrlImg[$i][$j].'" alt="Galeri-'. $i+1 .'">';
+                                                echo '<img class="rounded shadow-sm mx-3" width="200px" height="250px" src="'.$UrlImg[$i][$j].'" alt="Galeri-'. $i+1 .'">';
                                             }else{
-                                                echo '<img class="img-fluid rounded shadow-sm" width="200px" height="200px" src="'.$UrlImg[$i][$j].'" alt="Galeri-'. $i+1 .'">';
+                                                echo '<img class="rounded shadow-sm" width="200px" height="250px" src="'.$UrlImg[$i][$j].'" alt="Galeri-'. $i+1 .'">';
                                             }
-
                                         }
                                     echo '</div>';
                                 echo '</div>';
                            }
                         ?>
-
                     </div>
                     <!-- show button if less than 1 data in UrlImg -->
                     <?php if(count($UrlImg) > 1) {?>
