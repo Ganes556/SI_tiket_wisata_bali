@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,9 +12,17 @@
     <!-- bootstrap css -->
     <link rel="stylesheet" href="./assets/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-    <!-- jquery -->    
+    <!-- jquery -->
     <script src="./assets/js/jquery-3.6.0.js"></script>
     <!-- custom css  -->
     <link rel="stylesheet" href="./assets/css/style.css">
     <!-- favicon -->
     <link rel="icon" type="image/png" href="./assets/img/LogoWhite.png" />
+    <!-- icon google -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+    <title><?= $title ?></title>
+</head>
+<body>

@@ -1,1 +1,0 @@
-DROP DATABASE `si_pmsn _tiket_wisata_bali`; 

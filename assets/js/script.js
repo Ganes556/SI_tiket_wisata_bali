@@ -73,11 +73,27 @@ $(document).ready(function () {
 
   });
   
-  $("button[data-bs-dismiss='modal']").on('click', () => {
-      // wait biar tidak kelihatan ngeganti
-      setTimeout(() => {
-          $('#tiket').val(1);
-      }, 200);
-  })    
-  
 })
+function dismissBeliTiket(){
+    // wait biar tidak kelihatan ngeganti
+    setTimeout(() => {
+        $('#tiket').val(1);
+    }, 200);
+}
+
+$('#show-password').click(function() {
+    let $pwd = $('#password');
+    if ($pwd.attr('type') === 'password') {
+        $(this).toggleClass('d-none')
+        $("#hide-password").toggleClass('d-none');
+        $pwd.attr('type', 'text');
+    }    
+});
+$('#hide-password').click(function() {
+    let $pwd = $('#password');
+    if ($pwd.attr('type') === 'text') {
+        $(this).toggleClass('d-none')
+        $("#show-password").toggleClass('d-none');
+        $pwd.attr('type', 'password');
+    }    
+});

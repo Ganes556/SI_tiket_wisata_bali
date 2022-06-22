@@ -53,7 +53,9 @@
     // }
     
     // unlink("./api/test")
-    var_dump(unserialize('a:3:{i:0;s:105:"./assets/img/DataWisata/Air Terjun Kanto Lampo/Trekking-Menuju-Air-Terjun-Kanto-Lampo - Richis Salmon.jpg";i:1;s:109:"./assets/img/DataWisata/Air Terjun Kanto Lampo/air_terjun_kanto_lampo_waterfall_in_bali_2 - Richis Salmon.jpg";i:2;s:92:"./assets/img/DataWisata/Air Terjun Kanto Lampo/kanto-lampo20191030142716 - Richis Salmon.jpg";}'));
+    // var_dump(unserialize('a:3:{i:0;s:105:"./assets/img/DataWisata/Air Terjun Kanto Lampo/Trekking-Menuju-Air-Terjun-Kanto-Lampo - Richis Salmon.jpg";i:1;s:109:"./assets/img/DataWisata/Air Terjun Kanto Lampo/air_terjun_kanto_lampo_waterfall_in_bali_2 - Richis Salmon.jpg";i:2;s:92:"./assets/img/DataWisata/Air Terjun Kanto Lampo/kanto-lampo20191030142716 - Richis Salmon.jpg";}'));
+    // echo !'';
+    echo escapeshellcmd("./assets/img/login asdfasdf.png");
     // echo hash("md5", "user-profile-picture-55324");
     // echo time();
     // include "functionsLogic.php";

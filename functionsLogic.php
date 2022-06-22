@@ -20,10 +20,11 @@
         }
         return 1;
     }
-    // function upload image
-    function uploadImage($img,$path){
+    // // function upload image
+    // function uploadImage($img,$path){
 
-    }
+    // }
+
     function uniqueFileUpload($uploaddir,$filename,$ext){
         $prefix = $uploaddir . "/" . $filename . "-";
         $uploadfile = $prefix . uniqid(hash("md5",time())) . "." .$ext;

@@ -3,6 +3,7 @@
         $_SESSION['msg'] = [];
         extract($_POST);            
         beliTiket($_SESSION['user']['IdUser'], $IdWisata, $tiket);
+        
         if(isset($_SERVER['HTTP_REFERER'])){
             header("Location: $_SERVER[HTTP_REFERER]"); // redirect to prev page
             die();

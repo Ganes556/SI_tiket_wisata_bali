@@ -1,6 +1,6 @@
 <?php     
     if(isset($_SESSION['user']) && $_SESSION['user']['Role'] === "user"){
-        $user = $_SESSION['user']; // get user from session
+        $user = $_SESSION['user']; // get user from session        
         $transaksi = getTransactionUser($user['IdUser']); // get transaksi user        
 
         if($transaksi !== 0){ // if user have transaksi

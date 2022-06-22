@@ -1,4 +1,4 @@
-
+<?php if(isset($_SESSION['user']) && $_SESSION['user']['Role'] === 'admin'):?>
 <!-- card and search -->
     <div class="container ">
         <div class="row align-items-center justify-content-center">
@@ -8,10 +8,10 @@
                         <path d="M25 22H23.42L22.86 21.46C24.82 19.18 26 16.22 26 13C26 5.82 20.18 0 13 0C5.82 0 0 5.82 0 13C0 20.18 5.82 26 13 26C16.22 26 19.18 24.82 21.46 22.86L22 23.42V25L32 34.98L34.98 32L25 22ZM13 22C8.02 22 4 17.98 4 13C4 8.02 8.02 4 13 4C17.98 4 22 8.02 22 13C22 17.98 17.98 22 13 22Z" fill="#FFB72B" />
                     </svg>
                 </button>
-                <input type="text" id="search" class="search-input fw-semibold" type="search" placeholder="CARI WISATA">
+                <input type="text" id="search-admin-panel" class="search-input fw-semibold" type="search" placeholder="CARI WISATA">
             </div>
             <div class="col-1 m-0">
-                <button onclick="tambah()" class="btn btn-warning py-2  px-3">
+                <button onclick="tambah()" class="btn btn-warning py-3 px-4 rounded">
                     <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M28 16H16V28H12V16H0V12H12V0H16V12H28V16Z" fill="white" />
                     </svg>
@@ -19,7 +19,8 @@
             </div>
         </div>
     </div>
-    <div id="container-wisata" class="container-fluid mt-3 justify-content-center overflow-auto pt-2 " style="height: 50vh;">
+
+    <div id="container-admin-panel-wisata" class="container-fluid mt-3 justify-content-center pt-2 " style="height: 50px;">
         <!-- card -->
         <?php foreach ($allWisata as $key => $wisata) : ?>
             <div class="d-flex bg-secondary rounded mb-2 p-3 justify-content-between shadow card-wisata">
@@ -76,3 +77,4 @@
             </div>
         </div>
     </div>
+<?php endif; ?>
