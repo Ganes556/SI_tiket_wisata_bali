@@ -3,8 +3,7 @@
 
     ini_set( 'session.cookie_httponly', 1 );
     session_start();
-
-    include ("./middleware/cors.php");
+    
     include('queries.php');    
     
     if(isset($_SESSION['user']) && isset($_GET['logout'])){        
@@ -29,17 +28,17 @@
         if(isset($_POST['login'])){                                           
             extract($_POST);            
             $row = getUser($username); // get result from query
+
             if($row !== 0){
                 if(password_verify($password, $row["Password"])){                    
                     $row['Password'] = $password;
                     $_SESSION["user"] = $row;
                     if($row["Role"] === "user"){
-                        header("Location: index.php");
-                        die();
+                        header("Location: index.php");                        
                     }else if($row["Role"] === "admin"){
-                        header("Location: adminPanel.php?page=verifikasiTransaksi");
-                        die();
+                        header("Location: adminPanel.php?page=verifikasiTransaksi");                        
                     }                    
+                    
                     // alasan menggunakan die bukan return karena halaman login akan di redirect ke index.php
                     // perbedaan die dan return
                         // die() -> tidak akan mengirimkan data ke client
@@ -47,12 +46,8 @@
                     
                     die(); // stop script
                 }        
-            }
-            http_response_code(401);
-            unset($_SESSION["error"]["login"]);
-            $_SESSION["error"] = ["login" => ["Username or password is incorrect"]];
-            header("Location: login.php");
-            die();
+            }                    
+            return ['error'=> "Username or password is incorrect"];            
         }
     }
     // register
@@ -66,42 +61,40 @@
             die();
         }
 
-        if(isset($_POST['register'])){            
-            $_SESSION['error'] = [];
-            $_SESSION['msg'] = [];
+        if(isset($_POST['register'])){
             extract($_POST);
             $row = getUser($username); // get result from query
-            if($row !== 0){ // if user exist
-                http_response_code(409); // conflict
-                unset($_SESSION["error"]["register"]);
-                $_SESSION["error"] = ["register" => "Username already exist"];
-                header("Location: register.php");
-                die();
+            if($row !== 0){ // if user exist                                
+                return ['error' => "Username already exist"];
             }            
             
         
             // register user
             registerUser($nama, $username, $password, $noTelp, $alamat); // register user
-            unset($_SESSION["msg"]["register"]);
-            $_SESSION['msg'] = ["register" => "Register success!"]; // success message
-            header("Location: register.php");
-            die();
-        }
+            return ['msg'=> "Register success!"];            
+        }        
     }  
+       
 
+    
+    
+    
     include "./functionsLogic.php";
+    // login as user
     if(isset($_SESSION['user']) && $_SESSION['user']['Role'] === "user"){
         include "./middleware/checkTransaksiUser.php";    
         include "./middleware/buktiPembayaranUploded.php";
         include "./middleware/batalkanPembelian.php";
         include "./middleware/beliTiket.php";                
     }      
+    
     function dashboard(){
         if(isset($_SESSION['user']) && $_SESSION['user']['Role'] === "admin"){            
             header("Location: adminPanel.php?page=verifikasiTransaksi");
             die();
         }  
-        $wisata = getWisata();
+        
+        $wisata = getWisata();        
         
         if(isset($_GET["search"])){            
             $search =  $_GET['search'];     
@@ -119,7 +112,7 @@
         return $wisata;       
     }
 
-    function detailWisata(){  
+    function detailWisata(){          
         if(isset($_SESSION['user']) && $_SESSION['user']['Role'] === "admin"){
             header("Location: adminPanel.php?page=verifikasiTransaksi");
             die();
@@ -140,18 +133,18 @@
     }
 
     //! admin panel 
-    function adminPanel(){
+    function adminPanel(){        
         if(!isset($_SESSION['user']) || $_SESSION['user']['Role'] === "user"){            
             header("Location: index.php");
             die();            
         }
         
-
         if(!isset($_GET["page"]) || !in_array($_GET["page"],["verifikasiTransaksi","kelolaObjek"])){              
             http_response_code(404);
             echo "Page not found";
             die();
         }
+        
         $rowTransaksi = getAllTransaksiUser();        
         $allTransaksiHariIni = [];
         $allUser = getAllUser();
@@ -165,12 +158,11 @@
         if(isset($_GET["hapus"])){
             $id = $_GET["hapus"];   
             $oldWisata = getWisataById($id);
-            if($oldWisata === 0){
-                http_response_code(404);
+            if($oldWisata === 0){      
                 echo "Wisata not found";
                 die();
             }
-            // del files 
+ 
             
             // $oldWisata['Nama']
             $baseDir = "./assets/img/DataWisata/{$oldWisata['Nama']}";
@@ -207,9 +199,15 @@
             echo json_encode(["msg" => $msg]);
             die();
         }
+
         //! edit wisata
         if(isset($_POST["edit"])){            
             $oldWisata = getWisataById($_POST["id"]);
+            // change name dir
+            if($_POST['nama'] !== $oldWisata['Nama']){
+                rename("assets/img/DataWisata/" . $oldWisata['Nama'],"assets/img/DataWisata/" . $_POST['nama']);
+            }
+            
             //* handle files
             if(isset($_FILES)){
                 $thumbnail = null;
@@ -365,31 +363,8 @@
 
         return ["allUser" => $allUser, "allTransaksiUser" => $allTransaksiHariIni,"allWisata" => $allWisata];
     }           
-
-    // function userProfile(){        
-    //     if(!isset($_SESSION['user'])){
-    //         header("Location: ./");
-    //         die();
-    //     }
-    //     if(isset($_SESSION['user']) && $_SESSION['user']['Role'] === "admin"){            
-    //         header("Location: adminPanel.php?page=verifikasiTransaksi");
-    //         die();
-    //     }            
-    // }        
-    // function historyProfile(){
-    //     if(!isset($_SESSION['user'])){
-    //         header("Location: ./");
-    //         die();
-    //     }
-
-    //     if(isset($_SESSION['user']) && $_SESSION['user']['Role'] === "admin"){            
-    //         header("Location: adminPanel.php?page=verifikasiTransaksi");
-    //         die();
-    //     }
-    //     $transaksiUser = getTransactionUser($_SESSION['user']['IdUser']);
-    // }
-
-    function user(){
+  
+    function user(){        
         if(isset($_POST['changeProfile'])){
             extract($_POST);                            
             $getUser = getUserById($changeProfile);
@@ -428,6 +403,22 @@
             $_SESSION['user']['NomorTelp'] = $noTelp;                        
             echo "sukses!";                    
             die();
+        }
+    }
+    function menuProfile(){        
+        if(isset($_SESSION['user']) && isset($_GET['page'])){
+            // control user profile
+            user();
+            // profile
+            if($_GET['page'] === "profile"){                    
+                include_once "./template/user/profile.php";
+                die();
+            }
+            if($_GET['page'] === "history"){
+                $historyTransaksiUser = getHistoryTransaksiUser($_SESSION['user']['IdUser']);            
+                include_once "./template/user/history.php";
+                die();
+            }        
         }
     }
 ?>

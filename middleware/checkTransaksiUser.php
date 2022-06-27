@@ -11,7 +11,7 @@
                 // expired
                 changeStatusPembelian($transaksi['IdTransaksi'], "kadaluarsa");                
             }else{
-                $wisataInTransaksi = getWisataById($transaksi["IdWisata"]);                
+                $wisataInTransaksi = getWisataById($transaksi["IdWisata"]);
             }
         }
     } 

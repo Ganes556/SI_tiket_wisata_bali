@@ -1,6 +1,6 @@
 <?php
     include('controller.php');
-    register();
+    $status = register();
     // head
     $title = "Register";
     include_once "./template/head.php";
@@ -12,18 +12,18 @@
                 <img class="img-fluid img-register" src="./assets/img/register.png" alt="login image">
             </div>
 
-            <div class="col pt-4 pe-5 m-auto <?php if (isset($_SESSION['error']['register']) || isset($_SESSION['msg']['register'])) echo 'overflow-auto' ?>" style="height: 100%;">
+            <div class="col pt-4 pe-5 m-auto <?php if (isset($status['error']) || isset($status['msg'])) echo 'overflow-auto' ?>" style="height: 100%;">
                 <div class="row px-4 mb-3">
                     <h1 class="m-0 p-0 mb-3 fw-bold fs-1">Selamat Datang!</h1>
-                    <?php if (isset($_SESSION['error']['register'])) { ?>
+                    <?php if (isset($status['error'])) { ?>
                         <div class="alert alert-danger">
-                            <?= $_SESSION['error']['register'] ?>
+                            <?= $status['error'] ?>
                         </div>
                     <?php } ?>
 
-                    <?php if (isset($_SESSION['msg']['register'])) { ?>
+                    <?php if (isset($status['msg'])) { ?>
                         <div class="alert alert-success">
-                            <?= $_SESSION['msg']['register'] ?>
+                            <?= $status['msg'] ?>
                         </div>
                     <?php }; ?>
 
@@ -42,9 +42,9 @@
                             <input type="text" required name='nama' class="form-control input-form" id="nama" placeholder="nama">
                             <label for="nama" class="hint">Nama</label>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" required name='noTelp' class="form-control input-form" id="noTelp" placeholder="No Telepon">
-                            <label for="noTelp" class="hint">No Telepon</label>
+                        <div class="form-floating mb-3">                        
+                            <input type="tel" pattern="08[0-9]{10}" required name='noTelp' class="form-control input-form" id="noTelp" placeholder="08xxxxxxxxx">
+                            <label for="noTelp" class="hint">No Telepon (08xxxxxxxxx)</label>
                         </div>
                         <div class="form-floating mb-4">
                             <input type="text" required name='alamat' class="form-control input-form" id="alamat" placeholder="Alamat">
@@ -54,7 +54,9 @@
                             <button type="submit" name="register" class="m-auto p-2 btn btn-warning text-white fw-bold fs-4 text-uppercase" style="width: 50%;">Register</button>
                         </div>
                     </form>
-                    <a href="http://localhost/project_UAS/login.php" class="m-auto p-2 text-center text-warning fw-bold fs-5 text-uppercase">login</a>
+                    <div class="container mt-2 text-center">
+                        <a href="http://localhost/project_UAS/login.php" class="m-auto p-2 text-center text-warning fw-bold fs-5 text-uppercase">login</a>
+                    </div>
                 </div>
             </div>
 

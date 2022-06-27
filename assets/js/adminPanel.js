@@ -1,4 +1,5 @@
 let idWisataHapus = 0;
+
 $("div[data-aksi='hapus']").click((e) => {
     let id = e.currentTarget.dataset['idWisata'];
     idWisataHapus = id;
@@ -10,7 +11,6 @@ $("#btn-hapus").click((e) => {
         type: 'GET',
         success: (data) => {
             idWisataHapus = 0;
-            alert(data);            
             location.reload();
         }
     })
@@ -35,7 +35,7 @@ function tambah() {
         url: "adminPanel.php?page=kelolaObjek&tambah",
         type: 'GET',
         success: (data) => {            
-            $('#navbar-side + div').html(data)            
+            $('#navbar-side + div').html(data)          
         }
     })
 }

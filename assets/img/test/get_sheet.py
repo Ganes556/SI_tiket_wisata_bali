@@ -25,12 +25,12 @@ sh = gc.open_by_url(
 )
 
 worksheet = sh.get_worksheet(0)
-covers = worksheet.get_values("B2:B")
-nama = worksheet.get_values("C2:C")
-galery = worksheet.get_values("E2:E")
-deskripsiWisata = worksheet.get_values("D2:D")
-open("desk.txt","w").write(str(deskripsiWisata))
-exit()
+covers = worksheet.get_values("B7:B")
+nama = worksheet.get_values("C7:C")
+galery = worksheet.get_values("E7:E")
+# deskripsiWisata = worksheet.get_values("D2:D")
+# open("desk.txt","w").write(str(deskripsiWisata))
+# exit()
 
 converted_covers = []
 for i in range(len(covers)):
@@ -58,18 +58,18 @@ for i in range(len(galery)):
     converted_galery.append(galery_sublist)
 
 for i in range(len(converted_nama)):
-    cover_path = os.path.join(os.getcwd(), "Data Wisata", converted_nama[i], "Cover")
-    galery_path = os.path.join(os.getcwd(), "Data Wisata", converted_nama[i])
+    cover_path = os.path.join(os.getcwd(), "DataWisata", converted_nama[i], "Cover")
+    galery_path = os.path.join(os.getcwd(), "DataWisata", converted_nama[i])
     os.makedirs(
-        os.path.join(os.getcwd(), "Data Wisata", converted_nama[i], "Cover"),
+        os.path.join(os.getcwd(), "DataWisata", converted_nama[i], "Cover"),
         exist_ok=True,
     )
     wget.download(converted_covers[i], cover_path)
-    time.sleep(2)
+    time.sleep(3)
 
     for j in range(len(converted_galery[i])):
         wget.download(converted_galery[i][j], galery_path)
-        time.sleep(2)
+        time.sleep(3)
 
 # for i in range(len(converted_nama)):
 #     # cover_path = os.path.join(os.getcwd(), "Data Wisata", converted_nama[i], "Cover")

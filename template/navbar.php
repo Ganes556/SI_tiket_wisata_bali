@@ -6,9 +6,19 @@
                 <img class="img-fluid" src="./assets/img/Logo.png" alt="Logo">                
             </a>
             <div class="navbar-nav ms-auto d-flex align-items-center">
-                <?php if (isset($wisataInTransaksi) && !isset($userProfileHistory)) { ?>
+                <!-- Btn beli tiket di navbar -->
+                <?php if(isset($wisata['Nama']) && !isset($wisataInTransaksi)): ?>
+                    <?php if(!isset($_SESSION['user'])): ?>
+                        <button name='' type="button" onclick="location.href='http://localhost/project_UAS/login.php'" class="btn px-5 btn-warning text-white fw-bold text-uppercase">Beli Tiket</button>
+                    <?php else: ?>
+                        <button name='' type="button" onclick="clickBeliTiket('<?=$wisata['Nama'] ?>',<?=$wisata['Harga']?> , <?=$wisata['IdWisata']?>)" data-bs-toggle="modal" data-bs-target="#modalTicket" class="btn px-5 btn-warning text-white fw-bold text-uppercase">Beli Tiket</button>
+                    <?php endif; ?>
+                <?php endif; ?>
+                <!-- Btn pembayaran -->
+                <?php if (isset($wisataInTransaksi) && !isset($userProfileHistory)) : ?>
                     <button class="btn btn-danger me-3 px-4 fw-bold" data-bs-toggle="modal" data-bs-target="#modalPembayaran">PEMBAYARAN</button>
-                <?php } ?>
+                <?php endif; ?>
+                <!-- menu profile -->
                 <?php if (isset($_SESSION['user'])) { ?>
                     <div class="dropdown ms-3">
                         <div class="" style="cursor: pointer;" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,7 +49,7 @@
                             </li>
                         </ul>
                     </div>
-                <?php } else { ?>
+                <?php } else if(!isset($wisata['Nama'])) { ?>
                     <a class="btn px-5 me-3 btn-custom text-decoration-none fw-bold" href="register.php">REGISTER</a>
                     <a class="px-5 btn btn-warning text-white fw-bold" href="login.php">LOGIN</a>
                 <?php } ?>

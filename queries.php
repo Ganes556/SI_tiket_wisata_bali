@@ -15,27 +15,7 @@
         $conn->close();
         return 0;        
     }
-    
-    // // get history transaksi 
-    // function getHistoryTransaksi($idUser){
-    //     $conn = conn();
-    //     $sql= "SELECT * FROM transaksi WHERE IdUser = ?";
-    //     $prepare = $conn -> prepare($sql);
-    //     $prepare -> bind_param("s", $idUser);
-    //     $prepare -> execute();
-    //     $result = $prepare -> get_result();
-    //     if ($result->num_rows > 0) {
-    //         $transaksi_arr = array();
-    //         while($row = $result->fetch_assoc()) { 
-    //             $transaksi_arr[] = $row;                
-    //         }
-    //         $conn->close();
-    //         return $transaksi_arr;
-    //     }
-    //     $conn->close();
-    //     return 0;
-    // }
-
+    // get user by username untuk check username di register
     function getUser($username){
         $conn = conn();
         $sql= "SELECT * FROM users WHERE Username = ?";
@@ -51,6 +31,7 @@
         $conn->close();
         return 0;
     }            
+    // get user by id
     function getUserById($idUser){
         $conn = conn();
         $sql= "SELECT * FROM users WHERE IdUser = ?";
@@ -66,7 +47,7 @@
         $conn->close();
         return 0;
     }     
-
+    // regis user
     function registerUser($nama, $username, $password, $noTelp, $alamat){
         $conn = conn();
         $sql = "INSERT INTO users (Nama, Username, Password, NomorTelp, Alamat) VALUES (?, ?, ?, ?, ?)";
@@ -77,6 +58,7 @@
         $prepare -> execute();
         $conn->close();        
     }
+    // get all wisata
     function getWisata(){
         $conn = conn();
         $sql= "SELECT * FROM wisata";
@@ -94,6 +76,7 @@
         $conn->close();
         return 0;
     }
+    // get wisata by id
     function getWisataById($idWisata){
         $conn = conn();
         $sql= "SELECT * FROM wisata WHERE IdWisata = $idWisata";
@@ -216,8 +199,7 @@
     }
     // get all transaksi by id user
     function getHistoryTransaksiUser($idUser){
-        $conn = conn();
-        // $sql= "SELECT * FROM transaksi WHERE IdUser = ?";
+        $conn = conn();        
         $sql= "SELECT transaksi.IdTransaksi, JumlahTiket, TanggalPembelian, StatusPembelian ,wisata.Nama as NamaWisata, users.Nama as NamaPembeli, wisata.Harga FROM transaksi INNER JOIN wisata ON transaksi.IdWisata = wisata.IdWisata INNER JOIN users ON transaksi.IdUser = users.IdUser WHERE transaksi.IdUser = ? ORDER BY FIELD(StatusPembelian, 'menunggu pembayaran','menunggu verifikasi', 'terverifikasi', 'kadaluarsa', 'ditolak' , 'dibatalkan')";
         $prepare = $conn -> prepare($sql);
         $prepare -> bind_param("s", $idUser);
@@ -232,7 +214,7 @@
         $conn->close();
         return $transaksi_arr;
     }    
-    
+    // update user
     function updateUser($data){
         extract($data);
         $password = password_hash($password, PASSWORD_DEFAULT);

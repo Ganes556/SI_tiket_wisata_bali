@@ -1,21 +1,12 @@
 <?php
-    include "controller.php";
-    if(isset($_SESSION['user']) && isset($_GET['page'])){
-        // profile
-        if($_GET['page'] === "profile"){                    
-            include_once "./template/user/profile.php";
-            die();
-        }
-        if($_GET['page'] === "history"){
-            $transaksiUser = getTransactionUser($_SESSION['user']['IdUser']);
-            include_once "./template/user/history.php";
-            die();
-    }
-}
-$wisata = detailWisata();
-// head
-$title = $wisata['Nama'];
-include_once "./template/head.php";
+    include "controller.php";    
+    // menu handler profile
+    menuProfile();
+
+    $wisata = detailWisata();
+    // head
+    $title = $wisata['Nama'];
+    include_once "./template/head.php";
 
 ?>
     <div class="main">
@@ -43,8 +34,10 @@ include_once "./template/head.php";
                         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner p-3">
                                 <?php
+                                
                                 //  looping galeri wisata
                                 $UrlImg = array_chunk(unserialize($wisata['UrlGaleriWST']), 3); // split array into 3 parts
+
                                 for ($i = 0; $i < count($UrlImg); $i++) {
                                     if ($i == 0) {
                                         echo '<div class="carousel-item active">';

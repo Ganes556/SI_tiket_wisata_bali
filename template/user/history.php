@@ -5,8 +5,8 @@ if (isset($_SESSION['user'])) {
 
 ?>
     <div class="main">
-    <?php
-        // navbar
+    <!-- navbar -->
+    <?php        
         $fixedTo = "sticky-top";
         $userProfileHistory = 1;
         $navbar = "navbar-accent";

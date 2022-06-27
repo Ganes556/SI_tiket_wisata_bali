@@ -9,6 +9,7 @@
             header("Location: $_SERVER[HTTP_REFERER]"); // redirect to prev page
             die();
         }
+        
         header("Location: http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
         // berisi die karena tidak akan mengirimkan data ke client
         die();
