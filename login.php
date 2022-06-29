@@ -46,7 +46,7 @@
                         </div>
                     </form>
                     <div class="container mt-2 text-center"> 
-                        <a href="http://localhost/project_UAS/register.php" class="m-auto p-2 text-center text-warning fw-bold fs-5 text-uppercase">Register</a>
+                        <a href="register.php" class="m-auto p-2 text-center text-warning fw-bold fs-5 text-uppercase">Register</a>
                     </div>
                 </div>
 

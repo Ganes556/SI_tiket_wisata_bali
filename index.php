@@ -55,10 +55,10 @@
                                             </div>
                                             <p class="card-text fw-light truncate-text"><?= $w['Deskripsi'] ?></p>
                                             <div class="">
-                                                <a href="http://localhost/project_UAS/detailWisata.php?id=<?= $w['IdWisata'] ?>" class="btn btn-custom px-4 text-warning fw-bold text-uppercase">Detail</a>
+                                                <a href="detailWisata.php?id=<?= $w['IdWisata'] ?>" class="btn btn-custom px-4 text-warning fw-bold text-uppercase">Detail</a>
 
                                                 <?php if(!isset($_SESSION['user'])): ?>
-                                                    <button name='' type="button" onclick="location.href='http://localhost/project_UAS/login.php'" class="btn ms-3 btn-warning text-white fw-bold text-uppercase">Beli Tiket</button>
+                                                    <button name='' type="button" onclick="location.href='login.php'" class="btn ms-3 btn-warning text-white fw-bold text-uppercase">Beli Tiket</button>
                                                 <?php else: ?>
                                                     <button name='' type="button" onclick="clickBeliTiket('<?=$w['Nama'] ?>',<?=$w['Harga']?> , <?=$w['IdWisata']?>)" data-bs-toggle="modal" data-bs-target="#modalTicket" class="btn ms-3 btn-warning text-white fw-bold text-uppercase">Beli Tiket</button>
                                                 <?php endif; ?>

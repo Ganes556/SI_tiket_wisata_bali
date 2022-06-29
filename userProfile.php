@@ -1,6 +1,5 @@
 <?php
-    include "controller.php";
-    userProfile();
+    include "controller.php";    
     // head
     $title = "User Profile " . $_SESSION['user']["Nama"];
     include_once "./template/head.php";

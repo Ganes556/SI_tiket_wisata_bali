@@ -135,8 +135,7 @@ $('body').click(function (e) {
 })
 
 //! sending data edit and tambah
-function formEditTambah(action) {
-
+function formEditTambah(action) {    
     let formData = new FormData();
     if(action == "edit"){
         let id = $('#IdWisata').val();
@@ -179,7 +178,7 @@ function formEditTambah(action) {
         data: formData,
         contentType: false,
         processData: false,
-        success: (data) => {            
+        success: (data) => {                 
             let result = JSON.parse(data);
             alert(Object.values(result)[0]);
             location.reload();

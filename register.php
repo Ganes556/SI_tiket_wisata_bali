@@ -55,7 +55,7 @@
                         </div>
                     </form>
                     <div class="container mt-2 text-center">
-                        <a href="http://localhost/project_UAS/login.php" class="m-auto p-2 text-center text-warning fw-bold fs-5 text-uppercase">login</a>
+                        <a href="login.php" class="m-auto p-2 text-center text-warning fw-bold fs-5 text-uppercase">login</a>
                     </div>
                 </div>
             </div>

@@ -203,10 +203,8 @@
         //! edit wisata
         if(isset($_POST["edit"])){            
             $oldWisata = getWisataById($_POST["id"]);
-            // change name dir
-            if($_POST['nama'] !== $oldWisata['Nama']){
-                rename("assets/img/DataWisata/" . $oldWisata['Nama'],"assets/img/DataWisata/" . $_POST['nama']);
-            }
+            $uploadDir = "./assets/img/DataWisata/" . $oldWisata['Nama'];
+            
             
             //* handle files
             if(isset($_FILES)){
@@ -233,27 +231,32 @@
                 
                 //* new thumbnail
                 $newThumbnail = null;
-                if($thumbnail){         
-                    $oldUrl = $oldWisata["UrlThumbnailWST"];
-                    
-                    $uploadDir = pathinfo($oldUrl)["dirname"];
-                    $newInfo = pathinfo($thumbnail['name']);                    
 
-                    $newFileName = uniqueFileUpload($uploadDir,$newInfo['filename'],$newInfo['extension']);
+                                
+                $oldUrl = $oldWisata["UrlThumbnailWST"];                     
+
+                if($thumbnail){         
+                    
+                    $newInfo = pathinfo($thumbnail['name']);                    
+                    $newFileName = uniqueFileUpload($uploadDir . "/Cover",$newInfo['filename'],$newInfo['extension']);
+                                        
                     if(move_uploaded_file($thumbnail['tmp_name'], $newFileName)){
                         // echo json_encode(["msg" => "Sukses mengupload file!"]);
-                        $newThumbnail = $newFileName;
-                        unlink($oldUrl);                        
+                        $newThumbnail = $newFileName;           
+                        if(file_exists($oldUrl)){
+                            unlink($oldUrl);
+                        }                           
                     }
                 }
+
                 //* new galeri
                 $newGaleri = null;                
                 if(count($galeri) > 0){
                     $oldUrlGaleri = unserialize($oldWisata["UrlGaleriWST"]);    
                     foreach($galeri as $key => $value){
-                        // edit old
-                        $uploadDir = pathinfo($oldUrlGaleri[0])["dirname"];
-                        $newInfo = pathinfo($value['name']);   
+                        
+                        // edit old                        
+                        $newInfo = pathinfo($value['name']);                             
                         $newFileName = uniqueFileUpload($uploadDir,$newInfo['filename'],$newInfo['extension']);
                         
                         if($key < count($oldUrlGaleri)){
@@ -274,19 +277,50 @@
                             }
                         }
                         $newGaleri = $oldUrlGaleri;
-                    }
-                    $newGaleri = serialize($newGaleri);
+                    }                    
+                }
+            }            
+
+            $uploadDir = "./assets/img/DataWisata/" . $_POST['nama'];
+            if($thumbnail){                
+                $newThumbnail = $uploadDir . "/Cover" . "/" . pathinfo($newThumbnail)['basename'];
+            }else{
+                $oldThumb = $uploadDir . '/Cover' . "/" . pathinfo($oldWisata["UrlThumbnailWST"])['basename'];
+            }                
+            if($newGaleri){                
+                foreach($newGaleri as $key => $value){
+                    $newGaleri[$key] = $uploadDir . "/" . pathinfo($value)['basename'];
+                }                
+            }else{
+                $oldGal = unserialize($oldWisata["UrlGaleriWST"]);
+                foreach ($oldGal as $key => $value) {
+                    $oldGal[$key] = $uploadDir . "/" . pathinfo($value)['basename'];
+                }            
+            }
+
+            // * change name dir
+            if($_POST['nama'] !== $oldWisata['Nama']){
+                $oldName = "assets/img/DataWisata/" . $oldWisata['Nama'];
+                $newName = "assets/img/DataWisata/" . $_POST['nama'];
+                if(!rename($oldName,$newName)) {
+                    if (copy ($oldName,$newName)) {
+                        unlink($oldName);                        
+                    }                    
                 }
             }
 
             $newWisata = [
                 "Nama" => $_POST["nama"],
                 "Deskripsi" => $_POST["deskripsi"],
-                "UrlThumbnailWST" => $thumbnail ? $newThumbnail : $oldWisata["UrlThumbnailWST"],
-                "UrlGaleriWST" => $newGaleri ? $newGaleri : $oldWisata["UrlGaleriWST"],
+                "UrlThumbnailWST" => $thumbnail ? $newThumbnail : $oldThumb,
+                "UrlGaleriWST" => $newGaleri ? serialize($newGaleri) : serialize($oldGal),
                 "Harga" => $_POST["harga"]
-            ];
+            ];            
+            // var_dump($newThumbnail);
+            // var_dump($newWisata);
+            // die();
             updateWisata($_POST["id"],$newWisata);
+            
             echo json_encode(["msg"=>"Sukses mengedit wisata!"]);
             die();
         }
@@ -296,7 +330,8 @@
             if(empty($_POST["nama"]) || empty($_POST["deskripsi"]) || empty($_POST["harga"])){
                 echo json_encode(["error"=>"Tidak boleh ada field yang kosong!"]);
                 die();
-            }        
+            }
+
             //* handle files
             if(isset($_FILES)){
                 $wisata = [];      

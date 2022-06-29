@@ -37,7 +37,7 @@ $(document).ready(function () {
 
                       for (let i = 1; i < wisata.length; i++) {
                           let onclickBtn = (!statusLogin) 
-                              ? `onclick="location.href='http://localhost/project_UAS/login.php'"` 
+                              ? `onclick="location.href='login.php'"` 
                               : `onclick="clickBeliTiket(\`${wisata[i]['Nama']}\`,${wisata[i]['Harga']},${wisata[i]['IdWisata']})"`;
                               
                           card += `<div class="col">
@@ -52,7 +52,7 @@ $(document).ready(function () {
                                           </div>
                                           <p class="card-text fw-light truncate-text">${wisata[i]['Deskripsi']}</p>
                                           <div class="">
-                                              <a href="http://localhost/project_UAS/detailWisata.php?id=${wisata[i]['IdWisata']}"  class="btn btn-custom px-4 text-warning fw-bold text-uppercase">Detail</a>
+                                              <a href="detailWisata.php?id=${wisata[i]['IdWisata']}"  class="btn btn-custom px-4 text-warning fw-bold text-uppercase">Detail</a>
 
                                               <button id="beli-tiket" type="button" ${onclickBtn}
 

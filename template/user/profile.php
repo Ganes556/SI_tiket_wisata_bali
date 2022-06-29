@@ -20,7 +20,7 @@
                     <div class="d-flex">                        
                         <div class="m-auto">
                             <!-- add user -->                           
-                            <?php if(isset($_SESSION['user']['UrlGambarProfile'])): ?> 
+                            <?php if(isset($_SESSION['user']['UrlGambarProfile']) && $_SESSION['user']['UrlGambarProfile']): ?> 
                                 <div id="upload-profile" class="image-profile rounded-circle position-relative border-4 border-warning mx-auto" style="background-image: url('<?= $_SESSION['user']['UrlGambarProfile'] ?>');">
                             <?php else: ?>
                                 <div id="upload-profile" class="image-profile rounded-circle position-relative border-4 border-warning mx-auto">

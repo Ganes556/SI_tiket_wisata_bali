@@ -46,7 +46,7 @@ function sendProfileChange(idUser){
         processData: false,
         success: (data) => {                            
             alert(data);
-            location.href = "http://localhost/project_UAS/index.php?page=profile";
+            location.href = "index.php?page=profile";
         }
     })    
 }

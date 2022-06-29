@@ -1,4 +1,3 @@
-
 <header class="<?= $fixedTo ?>">
     <nav class="navbar shadow navbar-expand-lg <?= $navbar ?> mb-5">
         <div class="container-fluid px-3 d-flex justify-content-between">
@@ -9,7 +8,7 @@
                 <!-- Btn beli tiket di navbar -->
                 <?php if(isset($wisata['Nama']) && !isset($wisataInTransaksi)): ?>
                     <?php if(!isset($_SESSION['user'])): ?>
-                        <button name='' type="button" onclick="location.href='http://localhost/project_UAS/login.php'" class="btn px-5 btn-warning text-white fw-bold text-uppercase">Beli Tiket</button>
+                        <button name='' type="button" onclick="location.href='login.php'" class="btn px-5 btn-warning text-white fw-bold text-uppercase">Beli Tiket</button>
                     <?php else: ?>
                         <button name='' type="button" onclick="clickBeliTiket('<?=$wisata['Nama'] ?>',<?=$wisata['Harga']?> , <?=$wisata['IdWisata']?>)" data-bs-toggle="modal" data-bs-target="#modalTicket" class="btn px-5 btn-warning text-white fw-bold text-uppercase">Beli Tiket</button>
                     <?php endif; ?>
@@ -22,7 +21,7 @@
                 <?php if (isset($_SESSION['user'])) { ?>
                     <div class="dropdown ms-3">
                         <div class="" style="cursor: pointer;" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <?php if(isset($_SESSION['user']['UrlGambarProfile'])) : ?> 
+                        <?php if(isset($_SESSION['user']['UrlGambarProfile']) && $_SESSION['user']['UrlGambarProfile']) : ?>                             
                             <img src="<?= $_SESSION['user']['UrlGambarProfile'] ?>" class="rounded-circle border-warning border-2" width="50px" height="50px" alt="" srcset="">                    
                         <?php else: ?>
                             <img src="./assets/img/no-user-profile.png" width="50px" height="50px" alt="" srcset="">
