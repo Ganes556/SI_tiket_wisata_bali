@@ -39,7 +39,7 @@
 
         <div class="col-9 px-3 overflow-auto h-100">
             <div class="row p-5 ">
-                <div class="col card text-dark bg-warning mb-3 text-white" style="max-width: 18rem;">
+                <div class="col card bg-warning mb-3 text-white">
                     <div class="card-body text-center">
                         <h3 class="card-title fw-bold">Objek Wisata Terdaftar</h3>
                         <h3 class="fw-bold mt-3"><?= count($allWisata) ?></h3>
@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <div class="col mx-3  card text-dark bg-warning mb-3 text-white" style="max-width: 18rem;">
+                <div class="col mx-3 card bg-warning mb-3 text-white">
                     <div class="card-body text-center">
                         <h3 class="card-title fw-bold">Transaksi Hari Ini</h3>
                         <h3 class="fw-bold mt-3"><?= count($allTransaksiUser) ?></h3>
@@ -56,7 +56,7 @@
                 </div>
 
 
-                <div class="col card text-dark bg-warning mb-3 text-white" style="max-width: 18rem;">
+                <div class="col card bg-warning mb-3 text-white">
                     <div class="card-body text-center">
                         <h3 class="card-title fw-bold">Jumlah Pengguna</h3>
                         <h3 class="fw-bold mt-3"><?= count($allUser) ?></h3>

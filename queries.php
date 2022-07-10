@@ -199,7 +199,7 @@
     }
     // get all transaksi by id user
     function getHistoryTransaksiUser($idUser){
-        $conn = conn();        
+        $conn = conn();
         $sql= "SELECT transaksi.IdTransaksi, JumlahTiket, TanggalPembelian, StatusPembelian ,wisata.Nama as NamaWisata, users.Nama as NamaPembeli, wisata.Harga FROM transaksi INNER JOIN wisata ON transaksi.IdWisata = wisata.IdWisata INNER JOIN users ON transaksi.IdUser = users.IdUser WHERE transaksi.IdUser = ? ORDER BY FIELD(StatusPembelian, 'menunggu pembayaran','menunggu verifikasi', 'terverifikasi', 'kadaluarsa', 'ditolak' , 'dibatalkan')";
         $prepare = $conn -> prepare($sql);
         $prepare -> bind_param("s", $idUser);

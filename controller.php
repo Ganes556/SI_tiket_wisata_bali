@@ -94,20 +94,7 @@
             die();
         }  
         
-        $wisata = getWisata();        
-        
-        if(isset($_GET["search"])){            
-            $search =  $_GET['search'];     
-            $data = [];      
-            $data[] = (isset($_SESSION['user'])) ? 1 : 0;
-            foreach($wisata as $key => $value){                
-                if(str_contains(strtolower($value['Nama']), strtolower($search))){
-                    $data[] = $value;                    
-                }                
-            }            
-            echo json_encode($data);
-            die();
-        }
+        $wisata = getWisata();           
         
         return $wisata;       
     }
